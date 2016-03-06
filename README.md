@@ -21,7 +21,7 @@ as published by Sam Hocevar.
 See http://partymeister.org
 
 ### What is Revision?
-See http://revision-party.org
+See http://revision-party.net
 
 ### What do I need to compile?
 You need Free Pascal Compiler 3.0 or later, from http://freepascal.org
