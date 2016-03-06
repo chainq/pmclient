@@ -1,0 +1,11 @@
+{
+    "partymeister" : {
+        "server_host" : "<add your server IP/hostname here>",
+        "user" : "<add your pm username for auth>",
+        "pass" : "<add your pm password here for auth>"
+    },
+    "client_defaults" : {
+        "colorize_output" : true,
+        "filter_processed_entries" : true
+    }
+}
