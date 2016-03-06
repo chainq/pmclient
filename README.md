@@ -2,7 +2,7 @@
 This is a rudimentary PartyMeister client app, which was created to
 support/streamline some of the compo organizer stuff I do at Revision
 parties, like filtering irrelevant information for better overview,
-ease the downloading of entries at the Amiga compomachine, batch
+ease the downloading of entries onto the Amiga compomachine, batch
 entry downloads, etc.
 
 It contains (or rather, will contain, if I stop slacking) things I need,
@@ -29,9 +29,10 @@ You need Free Pascal Compiler 3.0 or later, from http://freepascal.org
 ### Why Pascal?
 Because I ported the recent Free Pascal to Amiga, and I wanted to use
 it for something. Also it made things incredibly portable. The code
-committed here compiles and works w/o modifications and huge external
-dependencies on a dozen different systems at least, w/o any platform 
-dependent code (except the console coloring differences), just using 
+committed here compiles to a single binary and works w/o modifications
+and external dependencies on a dozen different systems at least. It
+also contains no platform dependent code (except the console coloring
+differences and some safety checks during init for Amiga), thanks to
 Free Pascal's bundled packages.
 
 ### Really?
