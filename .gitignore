@@ -1,0 +1,7 @@
+pmclient
+*.ppu
+*.o
+*.s
+*.json
+*.sh
+*.res
