@@ -30,6 +30,9 @@ type
     function Num: Integer;
     function GEMAStatus: boolean;
     function GEMAStatusString: String;
+    function NumFiles: Integer;
+    function LastFileURL: String;
+    function LastFileName: String;
   end;
 
 implementation
@@ -83,12 +86,38 @@ var
   s: boolean;
 begin
   s:=GEMAStatus;
-  if s then
-    result:=CGreen
-  else
-    result:=CRed;
-
-  result:=result+BoolToStr(s,true)+CDefault;
+  result:=BoolToStr(s,CGreen,CRed)+BoolToStr(s,true)+CDefault;
 end;
+
+function TCompoEntry.NumFiles: Integer;
+var
+  tmp: TJSONData;
+begin
+  result:=0;
+  tmp:=FEntry.FindPath('files');
+  if assigned(FEntry) and (tmp.JSONType = jtArray) then
+    result:=tmp.Count;
+end;
+
+function TCompoEntry.LastFileURL: String;
+var
+  tmp: TJSONData;
+begin
+  result:='';
+  tmp:=FEntry.FindPath('files');
+  if assigned(FEntry) and (tmp.JSONType = jtArray) then
+    result:=tmp.Items[tmp.Count-1].FindPath('link').AsString;
+end;
+
+function TCompoEntry.LastFileName: String;
+var
+  tmp: TJSONData;
+begin
+  result:='';
+  tmp:=FEntry.FindPath('files');
+  if assigned(FEntry) and (tmp.JSONType = jtArray) then
+    result:=tmp.Items[tmp.Count-1].FindPath('name').AsString;
+end;
+
 
 end.

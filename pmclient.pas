@@ -135,19 +135,11 @@ begin
 
       ce:=TCompoEntry.Create(tmp);
       writeln(ce.ID:5,': ',ce.TitleAndAuthor);
-      writeln('':10,'Status: ',ce.StatusString:12,
-                    'GEMA: ':10,ce.GEMAStatusString);
-      tmp:=tmp.FindPath('files');
-      if assigned(tmp) and (tmp.JSONType = jtArray) then
-      begin
-        if tmp.Count > 0 then
-        begin
-          tmp:=tmp.Items[tmp.Count-1];
-          writeln('':10,tmp.FindPath('name').AsString,' from ',tmp.FindPath('link').AsString);
-        end
-        else
-          writeln('':10,'No downloads yet.');
-      end;
+      writeln('':10,'Status: ',ce.StatusString:12,'GEMA: ':10,ce.GEMAStatusString);
+      if ce.NumFiles > 0 then
+        writeln('':10,ce.LastFileName,' from ',ce.LastFileURL)
+      else
+        writeln('':10,'No downloads yet.');
       ce.Free;
     end;
     if hidden > 0 then
