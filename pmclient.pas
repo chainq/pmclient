@@ -15,6 +15,7 @@ uses
   fphttpclient,
   fpjson, jsonparser,
 
+  systemdep,
   consoleabuse,
   compoentry;
 
@@ -113,7 +114,18 @@ var
 const
   ShowAllEntries = true;
 
+procedure StartupChecks;
 begin
+  if not HasNetwork then
+  begin
+    writeln('error: No network');
+    halt(1);
+  end;
+end;
+
+begin
+  StartupChecks;
+
   j:=GetJSONfromURL(URL);
 
   tmp:=j.FindPath('competition');
