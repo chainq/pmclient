@@ -135,7 +135,7 @@ begin
 
       ce:=TCompoEntry.Create(tmp);
       writeln(ce.ID:5,': ',ce.TitleAndAuthor);
-      writeln('':10,'Status: ',ce.StatusString:12,'GEMA: ':10,ce.GEMAStatusString);
+      writeln('':10,'Status: ',ce.StatusString:12,'GEMA Clear: ':14,ce.GEMAStatusString);
       if ce.NumFiles > 0 then
         writeln('':10,ce.LastFileName,' from ',ce.LastFileURL)
       else

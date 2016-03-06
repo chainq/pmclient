@@ -86,7 +86,7 @@ var
   s: boolean;
 begin
   s:=GEMAStatus;
-  result:=BoolToStr(s,CGreen,CRed)+BoolToStr(s,true)+CDefault;
+  result:=BoolToStr(s,CGreen,CRed)+BoolToStr(s,'Yes','No')+CDefault;
 end;
 
 function TCompoEntry.NumFiles: Integer;
