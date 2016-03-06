@@ -13,33 +13,10 @@ program pmclient;
 uses
   classes, sysutils,
   fphttpclient,
-  fpjson, jsonparser;
+  fpjson, jsonparser,
 
-const
-{$IFNDEF NO_CONSOLE_COLORS}
-{$IFDEF HASAMIGA}
-{$DEFINE CONSOLE_HAS_COLORS}
-  DEFAULT = #27'[0m';
-  BOLD    = #27'[1m';
-  RED     = BOLD;
-  GREEN   = BOLD;
-{$ELSE}
-{$IFDEF HASUNIX}
-{$DEFINE CONSOLE_HAS_COLORS}
-  DEFAULT = #27'[0m';
-  BOLD    = #27'[1m';
-  RED     = #27'[31m';
-  GREEN   = #27'[32m';
-{$ENDIF}
-{$ENDIF}
-{$ENDIF}
-
-{$IFNDEF CONSOLE_HAS_COLORS}
-  DEFAULT = '';
-  BOLD    = '';
-  RED     = '';
-  GREEN   = '';
-{$ENDIF}
+  consoleabuse,
+  compoentry;
 
 
 const
@@ -125,21 +102,12 @@ begin
     end;
 end;
 
-{ returns true when the compo entry must be hidden }
-function HideCompoEntry(const e: TJSONdata): boolean;
-var
-  s: String;
-begin
-  s:=e.FindPath('status_text').AsString;
-  result:= (s = 'Disqualified') or (s = 'Checked');
-end;
-
 var
   j: TJSONData;
   entries: TJSONData;
   tmp: TJSONData;
+  ce: TCompoEntry;
   i: Integer;
-  s: String;
   hidden: Integer;
 
 const
@@ -159,16 +127,16 @@ begin
     for i:=0 to entries.Count-1 do
     begin
       tmp:=entries.Items[i];
-      if not ShowAllEntries and HideCompoEntry(tmp) then
+      if not ShowAllEntries and TCompoEntry.Hidden(tmp) then
       begin
         Inc(hidden);
         continue;
       end;
 
-      writeln(tmp.FindPath('id').AsString:5,': ',
-              BOLD,tmp.FindPath('title').AsString,DEFAULT,' by ',BOLD,tmp.FindPath('author').AsString,DEFAULT);
-      writeln('':10,'Status: ',tmp.FindPath('status_text').AsString:12,
-                    'GEMA: ':10,RED,tmp.FindPath('composer_is_not_member_of_a_copyrightcollective').AsString,DEFAULT);
+      ce:=TCompoEntry.Create(tmp);
+      writeln(ce.ID:5,': ',ce.TitleAndAuthor);
+      writeln('':10,'Status: ',ce.StatusString:12,
+                    'GEMA: ':10,ce.GEMAStatusString);
       tmp:=tmp.FindPath('files');
       if assigned(tmp) and (tmp.JSONType = jtArray) then
       begin
@@ -180,6 +148,7 @@ begin
         else
           writeln('':10,'No downloads yet.');
       end;
+      ce.Free;
     end;
     if hidden > 0 then
       writeln('':2,hidden,' compo entries were not listed.');
