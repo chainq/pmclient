@@ -30,9 +30,9 @@ You need Free Pascal Compiler 3.0 or later, from http://freepascal.org
 Because I ported the recent Free Pascal to Amiga, and I wanted to use
 it for something. Also it made things incredibly portable. The code
 committed here compiles and works w/o modifications and huge external
-dependencies a dozen different systems at least, w/o the need to write
-any platform dependent code (except the console coloring code diffs),
-just using Free Pascal's bundled packages.
+dependencies on a dozen different systems at least, w/o any platform 
+dependent code (except the console coloring differences), just using 
+Free Pascal's bundled packages.
 
 ### Really?
 Yes.
