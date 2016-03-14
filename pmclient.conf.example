@@ -1,11 +1,13 @@
 {
     "partymeister" : {
-        "server_host" : "<add your server IP/hostname here>",
-        "user" : "<add your pm username for auth>",
-        "pass" : "<add your pm password here for auth>"
+        "server_host" : "my.party.server",
+        "api_path" : "/my/server/api/path",
+        "api_token" : "MyAPIToken1234567890",
     },
     "client_defaults" : {
         "colorize_output" : true,
-        "filter_processed_entries" : true
+        "compo_filter_whitelist" : [],
+        "filter_processed_entries" : true,
+        "filter_finished_competitions" : true
     }
 }
